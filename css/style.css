@@ -1,0 +1,503 @@
+/* =========================================================
+   style.css - Halaman Profil Daffa Alfany (Tugas 2)
+
+   Daftar isi:
+   1. Reset & pengaturan dasar
+   2. Navbar (menu)
+   3. Header & hero (Flexbox)
+   4. Layout utama (CSS Grid)
+   5. Kartu & judul
+   6. Tabel
+   7. Keahlian & proyek
+   8. Form
+   9. Sidebar (aside)
+   10. Footer (Flexbox)
+   11. Responsive (media queries)
+
+   Palet warna:
+   #14213d = biru tua   (navbar, judul, footer)
+   #2a9d8f = hijau toska (aksen, tombol, link)
+   #f4f6fb = abu-abu muda (latar halaman)
+   #1f2937 = abu-abu gelap (warna teks)
+   ========================================================= */
+
+
+/* ---------- 1. Reset & pengaturan dasar ---------- */
+
+/* Universal reset: padding & border dihitung di dalam lebar elemen */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Saat klik menu, halaman bergulir halus ke bagian tujuan */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #1f2937;
+    background-color: #f4f6fb;
+}
+
+/* Gambar tidak boleh melebihi lebar wadahnya (mencegah scroll horizontal) */
+img {
+    max-width: 100%;
+}
+
+a {
+    color: #2a9d8f;
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: #14213d;
+}
+
+
+/* ---------- 2. Navbar (menu) ---------- */
+
+.menu-utama {
+    background-color: #14213d;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+/* Isi navbar boleh membungkus ke baris berikutnya bila ruang sempit,
+   sehingga menu tidak terpotong dan tidak memunculkan scroll horizontal */
+.menu-utama .container {
+    flex-wrap: wrap;
+}
+
+.menu-utama .navbar-nav {
+    flex-wrap: wrap;
+}
+
+.menu-utama .navbar-brand {
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.menu-utama .nav-link {
+    border-radius: 6px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+/* :hover = kursor di atas menu, :focus = dipilih lewat keyboard (Tab) */
+.menu-utama .nav-link:hover,
+.menu-utama .nav-link:focus {
+    color: #ffffff;
+    background-color: #2a9d8f;
+}
+
+
+/* ---------- 3. Header & hero (Flexbox) ---------- */
+
+.kepala {
+    /* Latar gradasi dibuat dengan background-image */
+    background-image: linear-gradient(135deg, #14213d 0%, #1d4e6b 55%, #2a9d8f 100%);
+    color: #ffffff;
+    padding-top: 64px;   /* memberi ruang untuk navbar yang menempel di atas */
+}
+
+/* Hero: foto dan teks disusun berdampingan dengan Flexbox */
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 36px;
+    padding: 64px 0 72px;
+}
+
+/* Di desktop foto dipindah ke kanan (order), di mobile kembali ke atas */
+.hero-foto {
+    order: 2;
+}
+
+.foto-profil {
+    width: 170px;
+    height: 170px;
+    object-fit: cover;
+    border: 5px solid #ffffff;
+    border-radius: 50%;
+    transition: border-color 0.3s;
+}
+
+.hero-foto:hover .foto-profil,
+.hero-foto:focus .foto-profil {
+    border-color: #2a9d8f;
+}
+
+.hero-sapaan {
+    font-size: 1.1rem;
+    color: #a8dadc;
+    margin-bottom: 4px;
+}
+
+.hero-teks h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.hero-peran {
+    font-size: 1.2rem;
+    color: #e5e7eb;
+    margin-bottom: 24px;
+}
+
+.hero-tombol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.hero-tombol .btn {
+    padding: 10px 22px;
+    border-radius: 30px;
+    font-weight: 600;
+}
+
+
+/* ---------- 4. Layout utama (CSS Grid) ---------- */
+
+/* 2 kolom: konten utama (2fr) dan sidebar (1fr) */
+.susunan-konten {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+    align-items: start;
+    margin: 40px 0;
+}
+
+/* Isi grid boleh menyempit lebih kecil dari isinya (misal tabel),
+   sehingga tidak muncul scroll horizontal di layar sangat kecil */
+.susunan-konten > main,
+.susunan-konten > aside {
+    min-width: 0;
+}
+
+
+/* ---------- 5. Kartu & judul ---------- */
+
+.kartu {
+    background-color: #ffffff;
+    border: 1px solid #e3e8f0;
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 8px rgba(20, 33, 61, 0.06);
+    transition: box-shadow 0.3s;
+}
+
+.kartu:hover {
+    box-shadow: 0 8px 24px rgba(20, 33, 61, 0.12);
+}
+
+/* Agar judul section tidak tertutup navbar saat diklik dari menu */
+section {
+    scroll-margin-top: 80px;
+}
+
+.kartu h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #14213d;
+    margin-bottom: 16px;
+}
+
+.kartu h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #2a9d8f;
+    margin: 20px 0 12px;
+}
+
+.kartu p {
+    margin-bottom: 12px;
+}
+
+/* Reset di atas menghapus jarak list, jadi dikembalikan di sini */
+.kartu ul {
+    padding-left: 22px;
+    margin-bottom: 12px;
+}
+
+.kartu ul ul {
+    margin-bottom: 0;
+}
+
+#prodi {
+    font-weight: 700;
+    color: #2a9d8f;
+}
+
+
+/* ---------- 6. Tabel ---------- */
+
+.table {
+    margin-bottom: 8px;
+}
+
+/* Judul kolom tabel pendidikan */
+.tabel-cv th {
+    background-color: #14213d;
+    color: #ffffff;
+    border-color: #14213d;
+}
+
+/* Baris judul yang digabung dengan colspan */
+.tabel-cv .judul-tabel {
+    background-color: #2a9d8f;
+    border-color: #2a9d8f;
+    text-align: center;
+}
+
+/* Tabel data diri: judul baris di kolom kiri */
+#tabel-data-diri th {
+    width: 35%;
+    background-color: #eef2f7;
+    color: #14213d;
+}
+
+
+/* ---------- 7. Keahlian & proyek ---------- */
+
+.kotak-keahlian {
+    height: 100%;
+    background-color: #f8fafc;
+    border: 1px solid #e3e8f0;
+    border-radius: 10px;
+    padding: 20px;
+    transition: border-color 0.3s;
+}
+
+.kotak-keahlian:hover {
+    border-color: #2a9d8f;
+}
+
+.kotak-keahlian h3 {
+    margin-top: 0;
+}
+
+.proyek {
+    background-color: #f8fafc;
+    border: 1px solid #e3e8f0;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+/* Judul proyek dan tahun sejajar kiri-kanan dengan Flexbox */
+.proyek-kepala {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.proyek-kepala h3 {
+    margin: 0;
+    color: #14213d;
+}
+
+.proyek .badge-info {
+    background-color: #2a9d8f;
+    font-size: 0.85rem;
+    padding: 6px 10px;
+}
+
+
+/* ---------- 8. Form ---------- */
+
+.label-grup {
+    margin-bottom: 6px;
+}
+
+.form-control {
+    border-radius: 8px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Kolom isian yang sedang aktif diberi garis toska */
+.form-control:focus {
+    border-color: #2a9d8f;
+    box-shadow: 0 0 0 3px rgba(42, 157, 143, 0.2);
+}
+
+.tombol-kirim {
+    background-color: #2a9d8f;
+    color: #ffffff;
+    padding: 10px 28px;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.tombol-kirim:hover,
+.tombol-kirim:focus {
+    background-color: #14213d;
+    color: #ffffff;
+}
+
+
+/* ---------- 9. Sidebar (aside) ---------- */
+
+/* Sidebar ikut menempel saat halaman digulir */
+.samping {
+    position: sticky;
+    top: 88px;
+}
+
+.kutipan {
+    color: #6b7280;
+    border-top: 1px solid #e3e8f0;
+    padding-top: 12px;
+    margin-top: 12px;
+}
+
+
+/* ---------- 10. Footer (Flexbox) ---------- */
+
+.kaki {
+    background-color: #14213d;
+    color: #cbd5e1;
+    padding: 28px 0;
+}
+
+.kaki-dalam {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.kaki p {
+    margin: 0;
+}
+
+.medsos {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    margin: 0;
+}
+
+.kaki a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.kaki a:hover,
+.kaki a:focus {
+    color: #2a9d8f;
+}
+
+
+/* ---------- 11. Responsive (media queries) ---------- */
+
+/* Tablet: ruang lebih sempit, jarak dikurangi */
+@media (max-width: 991px) {
+    .hero-teks h1 {
+        font-size: 2.5rem;
+    }
+
+    .kartu {
+        padding: 22px;
+    }
+}
+
+/* Mobile: lebar layar di bawah 768px */
+@media (max-width: 767px) {
+
+    /* Karena menu selalu tampil (tanpa burger), di layar kecil navbar
+       dibuat tidak menempel supaya tidak menutupi konten saat menu
+       membungkus ke beberapa baris. Brand di atas, menu di bawah, rata tengah. */
+    .menu-utama {
+        position: static;
+    }
+
+    .menu-utama .container {
+        justify-content: center;
+    }
+
+    .menu-utama .navbar-nav {
+        justify-content: center;
+        margin-left: 0 !important;   /* batalkan ml-auto */
+        padding-top: 8px;
+    }
+
+    /* Navbar tidak lagi menempel, jadi ruang atas tidak diperlukan */
+    .kepala {
+        padding-top: 0;
+    }
+
+    /* Grid 2 kolom menjadi 1 kolom (aside pindah ke bawah) */
+    .susunan-konten {
+        grid-template-columns: 1fr;
+        margin: 24px 0;
+    }
+
+    /* Hero: foto pindah ke atas teks, semua rata tengah */
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+        padding: 40px 0 48px;
+    }
+
+    .hero-foto {
+        order: 0;
+    }
+
+    .foto-profil {
+        width: 130px;
+        height: 130px;
+    }
+
+    .hero-teks h1 {
+        font-size: 2.1rem;
+    }
+
+    .hero-peran {
+        font-size: 1rem;
+    }
+
+    .hero-tombol {
+        justify-content: center;
+    }
+
+    /* Sidebar tidak perlu menempel di layar kecil */
+    .samping {
+        position: static;
+    }
+
+    .kartu {
+        padding: 18px;
+    }
+
+    .kartu h2 {
+        font-size: 1.4rem;
+    }
+
+    .table {
+        font-size: 0.9rem;
+    }
+
+    /* Judul proyek & tahun ditumpuk ke bawah */
+    .proyek-kepala {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    /* Footer: semua isi ditumpuk dan rata tengah */
+    .kaki-dalam {
+        flex-direction: column;
+        text-align: center;
+    }
+}
